@@ -1,10 +1,7 @@
-sap.ui.define([
-  "sap/ui/core/mvc/Controller"
-], (BaseController) => {
+sap.ui.define(["./BaseController"], (BaseController) => {
   "use strict";
 
   return BaseController.extend("testlista.controller.App", {
-      onInit() {
-      }
+    onInit() {},
   });
 });

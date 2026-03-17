@@ -5,8 +5,7 @@
         title="{i18n>lblOrderManagement}">
         <content>
             <Panel>
-                <Table id="idArticlesTable"
-                    items="{/viewData>}">
+                <Table id="idArticlesTable">
                     <headerToolbar>
                         <OverflowToolbar id="otbSubheader">
                             <ToolbarSpacer/>
@@ -52,10 +51,10 @@
                     <items>
                         <ColumnListItem>
                             <cells>
-                                <Text text="{viewData>CodArticolo}" />
-                                <Text text="{viewData>NomeArticolo}" />
-                                <Text text="{viewData>Importo}" />
-                                <Text text="{viewData>QuantitaDisp}" />
+                                <Text text="{CodArticolo}" />
+                                <Text text="{NomeArticolo}" />
+                                <Text text="{Importo}" />
+                                <Text text="{>QuantitaDisp}" />
                             </cells>
                         </ColumnListItem>
                     </items>
