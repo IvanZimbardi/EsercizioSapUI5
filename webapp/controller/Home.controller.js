@@ -3,15 +3,22 @@ sap.ui.define(["./BaseController", "sap/ui/model/json/JSONModel"], function (Bas
 
   return BaseController.extend("testlista.controller.Home", {
     onInit: function () {
-      this.oModelProducts = this.setModel(new JSONModel({}), "Products");
+      const oModel = new JSONModel({});
+      this.getView().setModel(oModel, "Products");
+
+      this.onLoadProducts();
     },
 
-    onProductsTable: async function () {
+    onLoadProducts: async function () {
+      this.setBusy(true);
       try {
-        const oResult = await this.getEntitySet("/ZES_articoliSet");
-        console.log("Dati caricati:", oResult.data);
-      } catch (oError) {
-        console.error("Errore durante il caricamento degli articoli", oError);
+        const oJSONModel = this.getModel("Products");
+        const oResultProducts = await this.getEntitySet("/ZES_articoliSet");
+        oJSONModel.setData(oResultProducts.data);
+      } catch (error) {
+        console.error("Errore nel caricamento prodotti: ", error);
+      } finally {
+        this.setBusy(false);
       }
     },
   });

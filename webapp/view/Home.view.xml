@@ -5,32 +5,17 @@
         title="{i18n>lblOrderManagement}">
         <content>
             <Panel>
-                <Table id="idArticlesTable">
+                <Table id="idArticlesTable"
+                    items="{Products>/}">
                     <headerToolbar>
-                        <OverflowToolbar id="otbSubheader">
-                            <ToolbarSpacer/>
-                            <SearchField ariaLabelledBy="text1"
-                                id="maxPrice"
-                                liveChange="onFilter">
-                                <layoutData>
-                                    <OverflowToolbarLayoutData maxWidth="300px"
-                                        shrinkable="true"
-                                        priority="NeverOverflow"/>
-                                </layoutData>
-                            </SearchField>
-                            <Button text="{i18n>btnReset}"
-                                type="Transparent"
-                                press="onReset"/>
-                            <OverflowToolbarButton tooltip="{i18n>btnAdd}"
-                                type="Transparent"
-                                text="{i18n>btnAdd}"
+                        <OverflowToolbar>
+                            <Button text="{i18n>btnAdd}"
                                 icon="sap-icon://add-product"
-                                press="onSort"/>
-                            <OverflowToolbarButton tooltip="{i18n>btnExport}"
-                                type="Transparent"
-                                text="{i18n>btnExport}"
-                                icon="sap-icon://excel-attachment">
-                            </OverflowToolbarButton>
+                                type="Transparent"/>
+                            <Button text="{i18n>btnExport}"
+                                icon="sap-icon://excel-attachment"
+                                type="Transparent"/>
+                            <ToolbarSpacer/>
                         </OverflowToolbar>
                     </headerToolbar>
                     <columns>
@@ -51,10 +36,10 @@
                     <items>
                         <ColumnListItem>
                             <cells>
-                                <Text text="{CodArticolo}" />
-                                <Text text="{NomeArticolo}" />
-                                <Text text="{Importo}" />
-                                <Text text="{>QuantitaDisp}" />
+                                <Text text="{Products>/CodArticolo}" />
+                                <Text text="{Products>/NomeArticolo}" />
+                                <Text text="{Products>/Importo}" />
+                                <Text text="{Products>/QuantitaDisp}" />
                             </cells>
                         </ColumnListItem>
                     </items>
