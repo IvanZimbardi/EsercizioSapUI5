@@ -1,0 +1,66 @@
+<mvc:View controllerName="testlista.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page"
+        title="{i18n>lblOrderManagement}">
+        <content>
+            <Panel>
+                <Table id="idArticlesTable"
+                    items="{/viewData>}">
+                    <headerToolbar>
+                        <OverflowToolbar id="otbSubheader">
+                            <ToolbarSpacer/>
+                            <SearchField ariaLabelledBy="text1"
+                                id="maxPrice"
+                                liveChange="onFilter">
+                                <layoutData>
+                                    <OverflowToolbarLayoutData maxWidth="300px"
+                                        shrinkable="true"
+                                        priority="NeverOverflow"/>
+                                </layoutData>
+                            </SearchField>
+                            <Button text="{i18n>btnReset}"
+                                type="Transparent"
+                                press="onReset"/>
+                            <OverflowToolbarButton tooltip="{i18n>btnAdd}"
+                                type="Transparent"
+                                text="{i18n>btnAdd}"
+                                icon="sap-icon://add-product"
+                                press="onSort"/>
+                            <OverflowToolbarButton tooltip="{i18n>btnExport}"
+                                type="Transparent"
+                                text="{i18n>btnExport}"
+                                icon="sap-icon://excel-attachment">
+                            </OverflowToolbarButton>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>lblItemCode}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>lblItemName}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>lblAmount}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>lblQuantitiesAvailable}" />
+                        </Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{viewData>CodArticolo}" />
+                                <Text text="{viewData>NomeArticolo}" />
+                                <Text text="{viewData>Importo}" />
+                                <Text text="{viewData>QuantitaDisp}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
