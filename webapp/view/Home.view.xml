@@ -36,10 +36,10 @@
                     <items>
                         <ColumnListItem>
                             <cells>
-                                <Text text="{Products>/CodArticolo}" />
-                                <Text text="{Products>/NomeArticolo}" />
-                                <Text text="{Products>/Importo}" />
-                                <Text text="{Products>/QuantitaDisp}" />
+                                <Text text="{CodArticolo}" />
+                                <Text text="{NomeArticolo}" />
+                                <Text text="{Importo}" />
+                                <Text text="{QuantitaDisp}" />
                             </cells>
                         </ColumnListItem>
                     </items>

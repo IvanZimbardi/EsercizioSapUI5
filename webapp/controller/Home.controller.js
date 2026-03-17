@@ -3,8 +3,7 @@ sap.ui.define(["./BaseController", "sap/ui/model/json/JSONModel"], function (Bas
 
   return BaseController.extend("testlista.controller.Home", {
     onInit: function () {
-      const oModel = new JSONModel({});
-      this.getView().setModel(oModel, "Products");
+      this.oModelProducts = this.setModel(new JSONModel({}), "Products");
 
       this.onLoadProducts();
     },
@@ -12,9 +11,11 @@ sap.ui.define(["./BaseController", "sap/ui/model/json/JSONModel"], function (Bas
     onLoadProducts: async function () {
       this.setBusy(true);
       try {
-        const oJSONModel = this.getModel("Products");
         const oResultProducts = await this.getEntitySet("/ZES_articoliSet");
-        oJSONModel.setData(oResultProducts.data);
+
+        let oListProducts = oResultProducts.data;
+
+        this.oModelProducts.setData(oListProducts);
       } catch (error) {
         console.error("Errore nel caricamento prodotti: ", error);
       } finally {

@@ -45,7 +45,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel"], fun
         };
       } catch (error) {
         console.error(error);
-        throw new Error(`${errorMessage || error?.message || error}`);
+        throw error;
       }
     },
   });
