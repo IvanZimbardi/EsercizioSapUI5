@@ -26,10 +26,7 @@ sap.ui.define(
         this.setBusy(true);
         try {
           const oResultProducts = await this.getEntitySet("/ZES_articoliSet");
-
-          let oListProducts = oResultProducts.data;
-
-          this.oModelProducts.setData(oListProducts);
+          this.oModelProducts.setData(oResultProducts.data);
         } catch (error) {
           console.error("Errore nel caricamento prodotti: ", error);
           throw error;

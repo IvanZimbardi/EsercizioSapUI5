@@ -31,6 +31,9 @@
                         <Column>
                             <Text text="{i18n>lblQuantitiesAvailable}" />
                         </Column>
+                        <Column hAlign="End">
+                            <Text text="{i18n>lblAction}" />
+                        </Column>
                     </columns>
 
                     <items>
@@ -40,6 +43,17 @@
                                 <Text text="{Products>NomeArticolo}" />
                                 <Text text="{Products>Importo}" />
                                 <Text text="{Products>QuantitaDisp}" />
+                                <HBox justifyContent="End">
+                                    <Button icon="sap-icon://hint"
+                                        type="Transparent"
+                                        tooltip="{i18n>tlpDetails}"/>
+                                    <Button icon="sap-icon://edit"
+                                        type="Transparent"
+                                        tooltip="{i18n>tlpEdit}"/>
+                                    <Button icon="sap-icon://delete"
+                                        type="Reject"
+                                        tooltip="{i18n>tlpDelete}"/>
+                                </HBox>
                             </cells>
                         </ColumnListItem>
                     </items>
