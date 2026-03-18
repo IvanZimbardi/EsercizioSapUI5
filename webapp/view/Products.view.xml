@@ -1,0 +1,44 @@
+<mvc:View controllerName="testlista.controller.Products"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page title="{i18n>lblOrderManagement}">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <HBox alignItems="Center"
+                    justifyContent="SpaceBetween"
+                    class="sapUiSmallMarginBottom">
+                    <Title text="{i18n>lblAddNewProd}"/>
+                    <Button icon="sap-icon://nav-back"
+                        text="{i18n>lblBackToList}"
+                        press=".onNavToHomeProducts" />
+                </HBox>
+
+                <f:SimpleForm>
+                    <f:content>
+                        <Label text="{i18n>lblItemCode}" />
+                        <Input value="{Products>CodArticolo}" />
+
+                        <Label text="{i18n>lblItemName}" />
+                        <Input value="{Products>NomeArticolo}" />
+
+                        <Label text="{i18n>lblAmount}" />
+                        <Input value="{Products>Importo}"
+                            description="EUR" />
+
+                        <Label text="{i18n>lblQuantitiesAvailable}" />
+                        <StepInput value="{Products>QuantitaDisp}" />
+                    </f:content>
+                </f:SimpleForm>
+
+                <HBox justifyContent="End"
+                    class="sapUiSmallMarginTop">
+                    <Button text="{i18n>btnCancel}"
+                        class="sapUiSmallMarginEnd" />
+                    <Button text="{i18n>btnSaveProd}"
+                        type="Emphasized" />
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

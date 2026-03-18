@@ -34,6 +34,49 @@ sap.ui.define(
           this.setBusy(false);
         }
       },
+
+      onDeleteProducts: async function (oEvent) {
+        async function deleteProducts() {
+          const oSelectedProducts = oEvent.getSource().getParent().getBindingContext("Products").getObject();
+          const sProdCode = oSelectedProducts.CodArticolo;
+          this.setBusy(true);
+
+          try {
+            await this.deleteEntity("/ZES_articoliSet", { CodArticolo: sProdCode }).then(async () => {
+              this.setBusy(true);
+
+              try {
+                await this.onLoadProducts();
+                MessageBox.success(this.getText("msgDelete"));
+              } catch (error) {
+                console.error(error);
+                MessageBox.error(error.message);
+              } finally {
+                this.setBusy(false);
+              }
+            });
+          } catch (error) {
+            console.error(error);
+            MessageBox.error(error.message);
+          } finally {
+            this.setBusy(false);
+          }
+        }
+        MessageBox.warning(this.getText("msgConfirmDelete"), {
+          actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+          onClose: (sKey) => {
+            if (sKey !== sap.m.MessageBox.Action.YES) return;
+
+            deleteProducts.apply(this);
+          },
+        });
+      },
+
+      onNavToAddProducts: function (oEvent) {
+        console.log("Bottone cliccato");
+        // const sKey = oEvent.getParameter("item").getKey();
+        this.navTo("RouteProducts");
+      },
     });
   },
 );

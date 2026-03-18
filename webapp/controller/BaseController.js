@@ -5,6 +5,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel"], fun
     getRouter: function () {
       return sap.ui.core.UIComponent.getRouterFor(this);
     },
+    navTo: function (sName, oParameters, bReplace) {
+      this.getRouter().navTo(sName, oParameters, undefined, bReplace);
+    },
     getModel: function (sName) {
       return this.getView().getModel(sName);
     },
@@ -17,8 +20,19 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel"], fun
     setBusy: function (bBusy) {
       this.getView().setBusy(bBusy);
     },
+    getText: function (sKey) {
+      return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sKey);
+    },
 
-    async getEntitySet(sPath, aFilters = [], oUrlParameters = {}, iTop = 0, iSkip = 0, sSort = "", sExpand = "") {
+    getEntitySet: async function (
+      sPath,
+      aFilters = [],
+      oUrlParameters = {},
+      iTop = 0,
+      iSkip = 0,
+      sSort = "",
+      sExpand = "",
+    ) {
       try {
         const oDataModel = this.getModel();
 
@@ -45,6 +59,29 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel"], fun
           data: data.data?.results || [],
           response: data.response,
           count: parseInt(data.data?.__count, 10) || 0,
+        };
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    },
+    deleteEntity: async function (sPath, oKey, oUrlParameters = {}) {
+      try {
+        const oDataModel = this.getModel();
+        const sKey = oDataModel.createKey(sPath, oKey);
+
+        const data = await new Promise((resolve, reject) => {
+          oDataModel.remove(sKey, {
+            urlParameters: oUrlParameters,
+            method: "DELETE",
+            success: (data, response) => resolve({ data, response }),
+            error: (error) => reject(error),
+          });
+        });
+
+        return {
+          data: data.data,
+          response: data.response,
         };
       } catch (error) {
         console.error(error);

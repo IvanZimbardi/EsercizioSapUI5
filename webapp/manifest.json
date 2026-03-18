@@ -93,12 +93,21 @@
           "name": "RouteHome",
           "pattern": ":?query:",
           "target": ["TargetHome"]
+        },
+        {
+          "name": "RouteProducts",
+          "pattern": "Products",
+          "target": ["TargetProducts"]
         }
       ],
       "targets": {
         "TargetHome": {
           "id": "Home",
           "name": "Home"
+        },
+        "TargetProducts": {
+          "id": "Products",
+          "name": "Products"
         }
       }
     },
