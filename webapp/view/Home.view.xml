@@ -43,12 +43,11 @@
                                 <Text text="{Products>Importo}" />
                                 <Text text="{Products>QuantitaDisp}" />
                                 <HBox justifyContent="End">
-                                    <Button icon="sap-icon://hint"
+                                    <Button icon="sap-icon://arrow-right"
                                         type="Transparent"
-                                        tooltip="{i18n>tlpDetails}"/>
-                                    <Button icon="sap-icon://edit"
-                                        type="Transparent"
-                                        tooltip="{i18n>tlpEdit}"/>
+                                        tooltip="{i18n>tlpDetails}"
+                                        press=".onNavToEditProducts"/>
+
                                     <Button icon="sap-icon://delete"
                                         type="Reject"
                                         tooltip="{i18n>tlpDelete}"

@@ -37,8 +37,8 @@ sap.ui.define(
 
       onDeleteProducts: async function (oEvent) {
         async function deleteProducts() {
-          const oSelectedProducts = oEvent.getSource().getParent().getBindingContext("Products").getObject();
-          const sProdCode = oSelectedProducts.CodArticolo;
+          const sProdCode = oEvent.getSource().getParent().getBindingContext("Products").getObject().CodArticolo;
+          console.log(sProdCode, "sprocode");
           this.setBusy(true);
 
           try {
@@ -74,9 +74,17 @@ sap.ui.define(
 
       onNavToAddProducts: function (oEvent) {
         console.log("Bottone cliccato");
-        // const sKey = oEvent.getParameter("item").getKey();
         this.navTo("RouteProducts");
       },
+
+      onNavToEditProducts: function (oEvent) {
+        console.log("Bottone cliccato");
+        const sKey = oEvent.getSource().getParent().getBindingContext("Products").getObject().CodArticolo;
+        console.log(sKey, "skey");
+        this.navTo("RouteDetailProducts", { CodArticolo: sKey });
+      },
+
+
     });
   },
 );

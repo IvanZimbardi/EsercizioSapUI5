@@ -17,17 +17,36 @@
                 <f:SimpleForm>
                     <f:content>
                         <Label text="{i18n>lblItemCode}" />
-                        <Input value="{Products>CodArticolo}" />
+                        <Input enabled="true"
+                            maxLength="3"
+                            type="Number"
+                            value="{
+                        path: 'Products>/CodArticolo', 
+                        type: 'sap.ui.model.type.Integer'
+                         }" />
 
                         <Label text="{i18n>lblItemName}" />
-                        <Input value="{Products>NomeArticolo}" />
+                        <Input maxLength="50"
+                            value="{
+                        path: 'Products>/NomeArticolo'
+                        }" />
 
                         <Label text="{i18n>lblAmount}" />
-                        <Input value="{Products>Importo}"
+                        <Input type="Number"
+                            maxLength="4"
+                            value="{
+                        path:'Products>/Importo',
+                        type:'sap.ui.model.type.Integer'
+                        }"
                             description="EUR" />
 
                         <Label text="{i18n>lblQuantitiesAvailable}" />
-                        <StepInput value="{Products>QuantitaDisp}" />
+                        <Input type="Number"
+                            maxLength="2"
+                            value="{
+                        path: 'Products>/QuantitaDisp', 
+                        type: 'sap.ui.model.type.Integer'
+                        }" />
                     </f:content>
                 </f:SimpleForm>
 
@@ -36,7 +55,8 @@
                     <Button text="{i18n>btnCancel}"
                         class="sapUiSmallMarginEnd" />
                     <Button text="{i18n>btnSaveProd}"
-                        type="Emphasized" />
+                        type="Emphasized"
+                        press=".onSaveProducts" />
                 </HBox>
             </VBox>
         </content>

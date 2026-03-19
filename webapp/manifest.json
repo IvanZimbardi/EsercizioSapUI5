@@ -98,6 +98,11 @@
           "name": "RouteProducts",
           "pattern": "Products",
           "target": ["TargetProducts"]
+        },
+        {
+          "name": "RouteDetailProducts",
+          "pattern": "Products/{CodArticolo}",
+          "target": ["TargetProducts"]
         }
       ],
       "targets": {
