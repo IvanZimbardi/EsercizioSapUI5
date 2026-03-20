@@ -8,14 +8,25 @@
                     items="{Products>/}">
                     <headerToolbar>
                         <OverflowToolbar>
+                            <StepInput width="25%"
+                                search="">
+                            </StepInput>
+                            <SearchField width="25%"
+                                search="">
+                            </SearchField>
+                            <Button text="Cerca" >
+                            </Button>
+                            <Button text="Reset" >
+                            </Button>
+                            <ToolbarSpacer/>
                             <Button text="{i18n>btnAdd}"
                                 icon="sap-icon://add-product"
                                 type="Transparent"
-                                press=".onNavToAddProducts"/>
+                                press=".onNavToAddProducts" />
                             <Button text="{i18n>btnExport}"
                                 icon="sap-icon://excel-attachment"
-                                type="Transparent"/>
-                            <ToolbarSpacer/>
+                                type="Transparent"
+                                press=".onExport" />
                         </OverflowToolbar>
                     </headerToolbar>
                     <columns>

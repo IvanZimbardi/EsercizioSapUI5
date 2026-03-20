@@ -1,7 +1,15 @@
 sap.ui.define(
-  ["./BaseController", "sap/ui/model/json/JSONModel", "sap/m/MessageBox"],
-  function (BaseController, JSONModel, MessageBox) {
+  [
+    "./BaseController",
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox",
+    "sap/ui/export/library",
+    "sap/ui/export/Spreadsheet",
+  ],
+  function (BaseController, JSONModel, MessageBox, exportLibrary, Spreadsheet) {
     "use strict";
+
+    const EdmType = exportLibrary.EdmType;
 
     return BaseController.extend("testlista.controller.Home", {
       onInit: function () {
@@ -84,7 +92,52 @@ sap.ui.define(
         this.navTo("RouteDetailProducts", { CodArticolo: sKey });
       },
 
+      createColumnConfig: function () {
+        return [
+          {
+            label: "Codice",
+            property: "CodArticolo",
+            type: EdmType.Number,
+            scale: 0,
+          },
+          {
+            label: "Nome Articolo",
+            property: "NomeArticolo",
+            width: "25",
+          },
+          {
+            label: "Importo",
+            property: "Importo",
+            type: EdmType.Currency,
+          },
+          {
+            label: "Quantità Disponibili",
+            property: "QuantitaDisp",
+            type: EdmType.Number,
+            scale: 0,
+          },
+        ];
+      },
 
+      onExport: function () {
+        const oTable = this.byId("idArticlesTable");
+        const oBinding = oTable.getBinding("items");
+        const aCols = this.createColumnConfig();
+        const oSettings = {
+          workbook: { columns: aCols },
+          dataSource: oBinding,
+        };
+        const oSheet = new Spreadsheet(oSettings);
+
+        oSheet
+          .build()
+          .then(function () {
+            MessageToast.show("Spreadsheet export has finished");
+          })
+          .finally(function () {
+            oSheet.destroy();
+          });
+      },
     });
   },
 );

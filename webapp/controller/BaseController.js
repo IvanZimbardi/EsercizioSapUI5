@@ -165,7 +165,6 @@ sap.ui.define(
           throw error;
         }
       },
-      
     });
   },
 );
