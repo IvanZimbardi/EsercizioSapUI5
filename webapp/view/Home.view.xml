@@ -1,7 +1,7 @@
 <mvc:View controllerName="testlista.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page title="{i18n>lblOrderManagement}">
+    <Page title="{i18n>lblOrders}">
         <content>
             <Panel>
                 <Table id="idArticlesTable"

@@ -3,6 +3,11 @@ sap.ui.define(
   function (BaseController, JSONModel, MessageBox, formatter) {
     "use strict";
 
+    const INIT_MODE = {
+      title: "",
+      isEdit: false,
+    };
+
     const INIT_DATA_PRODUCTS = {
       CodArticolo: 1,
       NomeArticolo: "",
@@ -17,15 +22,19 @@ sap.ui.define(
         this.getRouter().getRoute("RouteDetailProducts").attachPatternMatched(this._onEdit, this);
 
         this.oModelProducts = this.setModel(new JSONModel(INIT_DATA_PRODUCTS), "Products");
+        this.oModelMode = this.setModel(new JSONModel(INIT_MODE), "Mode");
       },
       _onNew: async function () {
+        this.oModelMode.setProperty("/title", "Nuovo Prodotto");
+        this.oModelMode.setProperty("/isEdit", false);
         this.oModelProducts.setData(INIT_DATA_PRODUCTS);
         console.log("nuovo prod");
       },
 
       _onEdit: async function (oEvent) {
+        this.oModelMode.setProperty("/title", "Modifica Prodotto");
+        this.oModelMode.setProperty("/isEdit", true);
         const sCodArticolo = oEvent.getParameter("arguments").CodArticolo;
-
         this.setBusy(true);
 
         try {
@@ -48,38 +57,43 @@ sap.ui.define(
       },
 
       onSaveProducts: async function () {
-        let oPayload = this.oModelProducts.getData();
-        console.log(oPayload, "oPayload");
-        this.setBusy(true);
-        try {
-          await this.createEntity("/ZES_articoliSet", oPayload).then(() => {
-            MessageBox.success(this.getText("msgSuccessProd"), {
+        const oUpdateProd = this.oModelProducts.getData();
+        const sProdCode = oUpdateProd.CodArticolo;
+        const oMode = this.oModelMode.getData();
+        if (oMode.isEdit) {
+          try {
+            let oResult = await this.updateEntity("/ZES_articoliSet", { CodArticolo: sProdCode }, oUpdateProd);
+            MessageBox.success(this.getText("msgEditProd"), {
               action: [sap.m.MessageBox.Action.CLOSE],
               onClose: () => {
                 this.navTo("RouteHome");
               },
             });
-          });
-        } catch (error) {
-          console.error(error);
-          MessageBox.error(error.message);
-        } finally {
-          this.setBusy(false);
-        }
-      },
-      onUpdateProducts: async function () {
-        try {
-          const oUpdateProd = this.oModelProducts.getData();
-          const sProdCode = oUpdateProd.CodArticolo;
-
-          let oResult = await this.updateEntity("/ZES_articoliSet", { CodArticolo: sProdCode }, oUpdateProd);
-
-          this.oModelProducts.setData(oResult.Data);
-        } catch (error) {
-          console.error(error);
-          MessageBox.error(error.message);
-        } finally {
-          this.setBusy(false);
+            this.oModelProducts.setData(oResult.Data);
+          } catch (error) {
+            console.error(error);
+            MessageBox.error(error.message);
+          } finally {
+            this.setBusy(false);
+          }
+        } else {
+          let oPayload = this.oModelProducts.getData();
+          this.setBusy(true);
+          try {
+            await this.createEntity("/ZES_articoliSet", oPayload).then(() => {
+              MessageBox.success(this.getText("msgSuccessProd"), {
+                action: [sap.m.MessageBox.Action.CLOSE],
+                onClose: () => {
+                  this.navTo("RouteHome");
+                },
+              });
+            });
+          } catch (error) {
+            console.error(error);
+            MessageBox.error(error.message);
+          } finally {
+            this.setBusy(false);
+          }
         }
       },
     });
