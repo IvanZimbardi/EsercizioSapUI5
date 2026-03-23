@@ -5,18 +5,22 @@
         <content>
             <Panel>
                 <Table id="idArticlesTable"
-                    items="{Products>/}">
+                    items="{Products>/Data}">
                     <headerToolbar>
                         <OverflowToolbar>
-                            <StepInput width="25%"
-                                search="">
-                            </StepInput>
-                            <SearchField width="25%"
-                                search="">
-                            </SearchField>
-                            <Button text="Cerca" >
+                            <Input width="25%"
+                                placeholder="{i18n>plhProductCode}"
+                                value="{Filters>/CodArticolo}">
+                            </Input>
+                            <Input width="25%"
+                                placeholder="{i18n>plhProductName}"
+                                value="{Filters>/NomeArticolo}">
+                            </Input>
+                            <Button text="{i18n>btnSearch}"
+                                type="Emphasized"
+                                press=".onSearch">
                             </Button>
-                            <Button text="Reset" >
+                            <Button text="{i18n>btnCancel}">
                             </Button>
                             <ToolbarSpacer/>
                             <Button text="{i18n>btnAdd}"

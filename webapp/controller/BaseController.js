@@ -1,6 +1,11 @@
 sap.ui.define(
-  ["sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel", "testlista/model/formatter"],
-  function (Controller, JSONModel, formatter) {
+  [
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel",
+    "testlista/model/formatter",
+    "testlista/util/entityUtils",
+  ],
+  function (Controller, JSONModel, formatter, entityUtils) {
     "use strict";
 
     return Controller.extend("testlista.controller.BaseController", {

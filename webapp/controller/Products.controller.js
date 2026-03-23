@@ -27,19 +27,19 @@ sap.ui.define(
       _onNew: async function () {
         this.oModelMode.setProperty("/title", "Nuovo Prodotto");
         this.oModelMode.setProperty("/isEdit", false);
+
         this.oModelProducts.setData(INIT_DATA_PRODUCTS);
-        console.log("nuovo prod");
       },
 
       _onEdit: async function (oEvent) {
         this.oModelMode.setProperty("/title", "Modifica Prodotto");
         this.oModelMode.setProperty("/isEdit", true);
-        const sCodArticolo = oEvent.getParameter("arguments").CodArticolo;
-        this.setBusy(true);
 
+        const sCodArticolo = oEvent.getParameter("arguments").CodArticolo;
+
+        this.setBusy(true);
         try {
           const oResult = await this.getEntity("/ZES_articoliSet", { CodArticolo: sCodArticolo });
-          console.log(oResult.data, "ores");
           this.oModelProducts.setData(oResult.data);
         } catch (error) {
           console.error(error);
@@ -47,22 +47,20 @@ sap.ui.define(
         } finally {
           this.setBusy(false);
         }
-
-        console.log("edit prod");
       },
 
       onNavToHomeProducts: function () {
-        console.log("bottone cliccato");
         this.navTo("RouteHome");
       },
 
       onSaveProducts: async function () {
         const oUpdateProd = this.oModelProducts.getData();
-        const sProdCode = oUpdateProd.CodArticolo;
         const oMode = this.oModelMode.getData();
+        const sProductCode = oUpdateProd.CodArticolo;
+
         if (oMode.isEdit) {
           try {
-            let oResult = await this.updateEntity("/ZES_articoliSet", { CodArticolo: sProdCode }, oUpdateProd);
+            let oResult = await this.updateEntity("/ZES_articoliSet", { CodArticolo: sProductCode }, oUpdateProd);
             MessageBox.success(this.getText("msgEditProd"), {
               action: [sap.m.MessageBox.Action.CLOSE],
               onClose: () => {
@@ -78,6 +76,7 @@ sap.ui.define(
           }
         } else {
           let oPayload = this.oModelProducts.getData();
+
           this.setBusy(true);
           try {
             await this.createEntity("/ZES_articoliSet", oPayload).then(() => {
