@@ -53,7 +53,8 @@
                 <HBox justifyContent="End"
                     class="sapUiSmallMarginTop">
                     <Button text="{i18n>btnCancel}"
-                        class="sapUiSmallMarginEnd" />
+                        class="sapUiSmallMarginEnd"
+                        press=".onCancel"/>
                     <Button text="{i18n>btnSaveProd}"
                         type="Emphasized"
                         press=".onSaveProducts" />

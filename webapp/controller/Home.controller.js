@@ -163,6 +163,18 @@ sap.ui.define(
 
         return oResult;
       },
+
+      _onReset: async function () {
+        this.oModelFilters.setProperty("/CodArticolo", "");
+        this.oModelFilters.setProperty("/NomeArticolo", "");
+        this.oModelProducts.setProperty("/Filters", []);
+
+        const oResult = await this.getEntitySet("/ZES_articoliSet");
+
+        this.oModelProducts.setProperty("/Data", oResult.data);
+
+        return oResult;
+      },
     });
   },
 );

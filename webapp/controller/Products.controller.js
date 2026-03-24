@@ -28,7 +28,7 @@ sap.ui.define(
         this.oModelMode.setProperty("/title", "Nuovo Prodotto");
         this.oModelMode.setProperty("/isEdit", false);
 
-        this.oModelProducts.setData(INIT_DATA_PRODUCTS);
+        this.oModelProducts.setData({ ...INIT_DATA_PRODUCTS });
       },
 
       _onEdit: async function (oEvent) {
@@ -53,6 +53,26 @@ sap.ui.define(
         this.navTo("RouteHome");
       },
 
+      onCancel: async function () {
+        const oMode = this.oModelMode.getData();
+        if (oMode.isEdit) {
+          const sCodArticolo = this.oModelProducts.getProperty("/CodArticolo");
+
+          this.setBusy(true);
+          try {
+            const oResult = await this.getEntity("/ZES_articoliSet", { CodArticolo: sCodArticolo });
+            this.oModelProducts.setData(oResult.data);
+          } catch (error) {
+            console.error(error);
+            MessageBox.error(error?.message);
+          } finally {
+            this.setBusy(false);
+          }
+        } else {
+          this.oModelProducts.setData({ ...INIT_DATA_PRODUCTS });
+        }
+      },
+
       onSaveProducts: async function () {
         const oUpdateProd = this.oModelProducts.getData();
         const oMode = this.oModelMode.getData();
@@ -67,7 +87,7 @@ sap.ui.define(
                 this.navTo("RouteHome");
               },
             });
-            this.oModelProducts.setData(oResult.Data);
+            this.oModelProducts.setData(oResult.data);
           } catch (error) {
             console.error(error);
             MessageBox.error(error.message);

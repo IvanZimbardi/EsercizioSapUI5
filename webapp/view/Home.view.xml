@@ -20,7 +20,8 @@
                                 type="Emphasized"
                                 press=".onSearch">
                             </Button>
-                            <Button text="{i18n>btnCancel}">
+                            <Button text="{i18n>btnCancel}"
+                            press="._onReset">
                             </Button>
                             <ToolbarSpacer/>
                             <Button text="{i18n>btnAdd}"
