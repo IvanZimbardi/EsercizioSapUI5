@@ -90,9 +90,14 @@
       },
       "routes": [
         {
-          "name": "RouteHome",
+          "name": "RouteDashboard",
           "pattern": ":?query:",
-          "target": ["TargetHome"]
+          "target": ["TargetDashboard"]
+        },
+        {
+          "name": "RouteProductsList",
+          "pattern": "ProductsList",
+          "target": ["TargetProductsList"]
         },
         {
           "name": "RouteProducts",
@@ -100,19 +105,46 @@
           "target": ["TargetProducts"]
         },
         {
-          "name": "RouteDetailProducts",
+          "name": "RouteProductsDetail",
           "pattern": "Products/{CodArticolo}",
           "target": ["TargetProducts"]
+        },
+        {
+          "name": "RouteOrdersList",
+          "pattern": "OrdersList",
+          "target": ["TargetOrdersList"]
+        },
+        {
+          "name": "RouteOrders",
+          "pattern": "Orders",
+          "target": ["TargetOrders"]
+        },
+        {
+          "name": "RouteOrdersDetail",
+          "pattern": "Orders/{NumOrdine}",
+          "target": ["TargetOrders"]
         }
       ],
       "targets": {
-        "TargetHome": {
-          "id": "Home",
-          "name": "Home"
+        "TargetDashboard": {
+          "id": "Dashboard",
+          "name": "Dashboard"
+        },
+        "TargetProductsList": {
+          "id": "ProductsList",
+          "name": "ProductsList"
         },
         "TargetProducts": {
           "id": "Products",
-          "name": "Products"
+          "name": "ProductsDetails"
+        },
+        "TargetOrdersList": {
+          "id": "OrdersList",
+          "name": "OrdersList"
+        },
+        "TargetOrders": {
+          "id": "OrdersDetails",
+          "name": "OrdersDetails"
         }
       }
     },

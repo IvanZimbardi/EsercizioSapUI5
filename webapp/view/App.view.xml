@@ -1,7 +1,33 @@
 <mvc:View controllerName="testlista.controller.App"
     displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
     xmlns="sap.m">
-    <App id="app">
-    </App>
+
+    <tnt:ToolPage id="toolPage">
+        <tnt:sideContent>
+            <tnt:SideNavigation>
+                <tnt:item>
+                    <tnt:NavigationList>
+                        <tnt:NavigationListItem text="{i18n>lblMenu}" icon="sap-icon://menu2"
+                            select=".onSideNavButtonPress" />
+
+                        <tnt:NavigationListItem text="{i18n>lblDashboard}"
+                            icon="sap-icon://home"
+                            select=".onNavToDashboard" />
+                        <tnt:NavigationListItem text="{i18n>lblProducts}"
+                            icon="sap-icon://product"
+                            select=".onNavToProductsList"/>
+                        <tnt:NavigationListItem text="{i18n>lblOrders}"
+                            icon="sap-icon://cart"
+                            select=".onNavToOrdersList"/>
+                    </tnt:NavigationList>
+                </tnt:item>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+
+        <tnt:mainContents>
+            <App id="app" />
+        </tnt:mainContents>
+    </tnt:ToolPage>
 </mvc:View>

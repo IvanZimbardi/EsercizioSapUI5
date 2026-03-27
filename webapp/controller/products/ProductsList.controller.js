@@ -1,13 +1,14 @@
 sap.ui.define(
   [
-    "./BaseController",
+    "../BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
     "sap/ui/export/library",
     "sap/ui/export/Spreadsheet",
     "testlista/util/entityUtils",
+    "testlista/model/formatter",
   ],
-  function (BaseController, JSONModel, MessageBox, exportLibrary, Spreadsheet, entityUtils) {
+  function (BaseController, JSONModel, MessageBox, exportLibrary, Spreadsheet, entityUtils, formatter) {
     "use strict";
 
     const EdmType = exportLibrary.EdmType;
@@ -29,9 +30,9 @@ sap.ui.define(
       NomeArticolo: "",
     };
 
-    return BaseController.extend("testlista.controller.Home", {
+    return BaseController.extend("testlista.controller.products.ProductsList", {
       onInit: function () {
-        this.getRouter().getRoute("RouteHome").attachPatternMatched(this._onObjectMatched, this);
+        this.getRouter().getRoute("RouteProductsList").attachPatternMatched(this._onObjectMatched, this);
         this.oModelProducts = this.setModel(new JSONModel(INIT_MODEL_PRODUCTS), "Products");
         this.oModelFilters = this.setModel(new JSONModel(INIT_MODEL_FILTERS), "Filters");
       },
@@ -77,7 +78,7 @@ sap.ui.define(
 
       onNavToEditProducts: function (oEvent) {
         const sKey = oEvent.getSource().getParent().getBindingContext("Products").getObject().CodArticolo;
-        this.navTo("RouteDetailProducts", { CodArticolo: sKey });
+        this.navTo("RouteProductsDetail", { CodArticolo: sKey });
       },
 
       createColumnConfig: function () {

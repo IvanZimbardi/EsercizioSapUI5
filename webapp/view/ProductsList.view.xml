@@ -1,28 +1,43 @@
-<mvc:View controllerName="testlista.controller.Home"
+<mvc:View controllerName="testlista.controller.products.ProductsList"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page title="{i18n>lblOrders}">
+    <Page title="{i18n>lblProducts}">
         <content>
-            <Panel>
+            <Panel class="sapUiResponsiveMargin"
+                width="auto">
+
+                <HBox wrap="Wrap"
+                    class="sapUiSmallMarginBottom"
+                    alignItems="End">
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>lblSearchFor}" />
+                        <Input width="200px"
+                            placeholder="{i18n>plhItemCode}"
+                            value="{Filters>/CodArticolo}" />
+                    </VBox>
+
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>lblSearchFor}" />
+                        <Input width="200px"
+                            placeholder="{i18n>plhItemName}"
+                            value="{Filters>/NomeArticolo}" />
+                    </VBox>
+
+                    <HBox>
+                        <Button text="{i18n>btnSearch}"
+                            type="Emphasized"
+                            press=".onSearch"
+                            class="sapUiTinyMarginEnd" />
+                        <Button text="{i18n>btnCancel}"
+                            press="._onReset" />
+                    </HBox>
+                </HBox>
+
                 <Table id="idArticlesTable"
                     items="{Products>/Data}">
                     <headerToolbar>
                         <OverflowToolbar>
-                            <Input width="25%"
-                                placeholder="{i18n>plhProductCode}"
-                                value="{Filters>/CodArticolo}">
-                            </Input>
-                            <Input width="25%"
-                                placeholder="{i18n>plhProductName}"
-                                value="{Filters>/NomeArticolo}">
-                            </Input>
-                            <Button text="{i18n>btnSearch}"
-                                type="Emphasized"
-                                press=".onSearch">
-                            </Button>
-                            <Button text="{i18n>btnCancel}"
-                            press="._onReset">
-                            </Button>
+                            <Title text="{i18n>lblProductsList}" />
                             <ToolbarSpacer/>
                             <Button text="{i18n>btnAdd}"
                                 icon="sap-icon://add-product"

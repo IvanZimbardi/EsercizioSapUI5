@@ -1,0 +1,74 @@
+<mvc:View controllerName="testlista.controller.products.ProductsDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page title="{i18n>lblProductsManagement}">
+        <content>
+            <Panel class="sapUiResponsiveMargin"
+                width="auto">
+                <VBox class="sapUiSmallMargin">
+                    <HBox alignItems="Center"
+                        justifyContent="SpaceBetween"
+                        class="sapUiSmallMarginBottom">
+                        <Title text="{Mode>/title}"/>
+                    </HBox>
+
+                    <f:SimpleForm>
+                        <f:content>
+                            <Label text="{i18n>lblItemCode}" />
+                            <Input width="300px"
+                                enabled="false"
+                                maxLength="3"
+                                type="Number"
+                                value="{
+                                path: 'Products>/CodArticolo', 
+                                type: 'sap.ui.model.type.Integer'
+                            }" />
+
+                            <Label text="{i18n>lblItemName}" />
+                            <Input width="300px"
+                                maxLength="50"
+                                value="{
+                                path: 'Products>/NomeArticolo'
+                            }" />
+
+                            <Label text="{i18n>lblAmount}" />
+                            <Input width="600px"
+                                type="Number"
+                                maxLength="4"
+                                value="{
+                                path:'Products>/Importo',
+                                type:'sap.ui.model.type.Integer'
+                            }"
+                                description="EUR" />
+
+                            <Label text="{i18n>lblQuantitiesAvailable}" />
+                            <Input width="300px"
+                                type="Number"
+                                maxLength="2"
+                                value="{
+                                path: 'Products>/QuantitaDisp', 
+                                type: 'sap.ui.model.type.Integer'
+                            }" />
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </Panel>
+        </content>
+        <footer>
+            <OverflowToolbar >
+                <Button icon="sap-icon://nav-back"
+                    text="{i18n>lblBackToList}"
+                    press=".onNavToProductsList">
+                </Button>
+                <ToolbarSpacer />
+                <Button text="{i18n>btnCancel}"
+                    class="sapUiSmallMarginEnd"
+                    press=".onCancel"/>
+                <Button text="{i18n>btnSaveProd}"
+                    type="Emphasized"
+                    press=".onSaveProducts" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

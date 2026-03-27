@@ -170,6 +170,35 @@ sap.ui.define(
           throw error;
         }
       },
+
+      loadFragment: function (sFragmentName, sFragmentId) {
+        var oView = this.getView();
+        var sId = sFragmentId || oView.getId() + "--" + sFragmentName;
+
+        // Controlla se il frammento è già caricato e lo restituisce direttamente
+        var oFragment = oView.byId(sId);
+        if (oFragment) {
+          return Promise.resolve(oFragment);
+        }
+
+        // Carica il frammento in modo asincrono
+        return sap.ui.core.Fragment.load({
+          id: oView.getId(),
+          name: sFragmentName,
+          controller: this,
+        }).then(
+          function (oFragment) {
+            // Aggiunge il frammento come dipendente della vista
+            oView.addDependent(oFragment);
+
+            // Se necessario, aggiungi altre logiche di configurazione o binding qui (ad esempio, il modello "i18n")
+            oFragment.setModel(this.getModel("i18n"), "i18n");
+
+            // Restituisce il frammento caricato
+            return oFragment;
+          }.bind(this),
+        );
+      },
     });
   },
 );

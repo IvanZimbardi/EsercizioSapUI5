@@ -1,0 +1,98 @@
+<mvc:View controllerName="testlista.controller.orders.OrdersList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page title="{i18n>lblOrders}">
+    <content>
+      <Panel class="sapUiResponsiveMargin"
+        width="auto">
+
+        <HBox wrap="Wrap"
+          class="sapUiSmallMarginBottom"
+          alignItems="End">
+          <VBox class="sapUiSmallMarginEnd">
+            <Label text="{i18n>lblSearchFor}" />
+            <Input width="150px"
+              value="{Filters>/NumOrdine}"
+              placeholder="{i18n>plhOrderNumber}" />
+          </VBox>
+
+          <VBox class="sapUiSmallMarginEnd">
+            <Label text="{i18n>lblSearchFor}" />
+            <Input width="150px"
+              value="{Filters>/Cliente}"
+              placeholder="{i18n>plhClient}" />
+          </VBox>
+
+          <VBox class="sapUiSmallMarginEnd">
+            <Label text="{i18n>lblSearchFor}" />
+            <Input width="150px"
+              value="{Filters>/Stato}"
+              placeholder="{i18n>plhStatus}" />
+          </VBox>
+
+          <HBox>
+            <Button text="{i18n>btnSearch}"
+              type="Emphasized"
+              press=".onSearch"
+              class="sapUiTinyMarginEnd" />
+            <Button text="{i18n>btnCancel}"
+              press="._onReset" />
+          </HBox>
+        </HBox>
+
+        <Table id="idOrdersListTable"
+          items="{Orders>/Data}">
+          <headerToolbar>
+            <OverflowToolbar>
+              <Title text="{i18n>lblOrdersList}" />
+              <ToolbarSpacer/>
+              <Button text="{i18n>btnAdd}"
+                icon="sap-icon://add-product"
+                type="Transparent"
+                press=".onNavToAddOrders">
+              </Button>
+            </OverflowToolbar>
+          </headerToolbar>
+
+          <columns>
+            <Column>
+              <Text text="{i18n>lblOrderNumber}" />
+            </Column>
+            <Column>
+              <Text text="{i18n>lblClient}" />
+            </Column>
+            <Column>
+              <Text text="{i18n>lblOrderDate}" />
+            </Column>
+            <Column>
+              <Text text="{i18n>lblTotalImport}" />
+            </Column>
+            <Column>
+              <Text text="{i18n>lblStatus}" />
+            </Column>
+            <Column hAlign="End"></Column>
+          </columns>
+
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{Orders>NumOrdine}" />
+                <Text text="{Orders>Cliente}" />
+                <Text text="{path: 'Orders>DataOrdine', formatter: '.formatter.convertDateInUTCRome'}" />
+                <Text text="{Orders>ImportoTot}" />
+                <Text text="{Orders>StatoTxt}" />
+                <HBox justifyContent="End">
+                  <Button icon="sap-icon://arrow-right"
+                    type="Transparent"
+                    tooltip="{i18n>tlpDetails}"
+                    press=".onNavToEditOrders" />
+                </HBox>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </Panel>
+    </content>
+  </Page>
+</mvc:View>

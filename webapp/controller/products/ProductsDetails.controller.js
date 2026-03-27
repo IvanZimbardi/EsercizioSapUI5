@@ -1,5 +1,5 @@
 sap.ui.define(
-  ["./BaseController", "sap/ui/model/json/JSONModel", "sap/m/MessageBox", "testlista/model/formatter"],
+  ["../BaseController", "sap/ui/model/json/JSONModel", "sap/m/MessageBox", "testlista/model/formatter"],
   function (BaseController, JSONModel, MessageBox, formatter) {
     "use strict";
 
@@ -15,13 +15,14 @@ sap.ui.define(
       QuantitaDisp: 0,
     };
 
-    return BaseController.extend("testlista.controller.Products", {
+    return BaseController.extend("testlista.controller.products.ProductsDetails", {
       onInit: function () {
         this.getRouter().getRoute("RouteProducts").attachPatternMatched(this._onNew, this);
 
-        this.getRouter().getRoute("RouteDetailProducts").attachPatternMatched(this._onEdit, this);
+        this.getRouter().getRoute("RouteProductsDetail").attachPatternMatched(this._onEdit, this);
 
         this.oModelProducts = this.setModel(new JSONModel(INIT_DATA_PRODUCTS), "Products");
+
         this.oModelMode = this.setModel(new JSONModel(INIT_MODE), "Mode");
       },
       _onNew: async function () {
@@ -49,8 +50,8 @@ sap.ui.define(
         }
       },
 
-      onNavToHomeProducts: function () {
-        this.navTo("RouteHome");
+      onNavToProductsList: function () {
+        this.navTo("RouteProductsList");
       },
 
       onCancel: async function () {
@@ -84,7 +85,7 @@ sap.ui.define(
             MessageBox.success(this.getText("msgEditProd"), {
               action: [sap.m.MessageBox.Action.CLOSE],
               onClose: () => {
-                this.navTo("RouteHome");
+                this.navTo("RouteProductsList");
               },
             });
             this.oModelProducts.setData(oResult.data);
@@ -103,7 +104,7 @@ sap.ui.define(
               MessageBox.success(this.getText("msgSuccessProd"), {
                 action: [sap.m.MessageBox.Action.CLOSE],
                 onClose: () => {
-                  this.navTo("RouteHome");
+                  this.navTo("RouteProductsList");
                 },
               });
             });

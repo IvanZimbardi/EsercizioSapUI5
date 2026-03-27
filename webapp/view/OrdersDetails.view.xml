@@ -1,0 +1,110 @@
+<mvc:View controllerName="testlista.controller.orders.OrdersDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core">
+	<Page title="{Mode>/title}">
+		<content>
+			<Panel class="sapUiResponsiveMargin"
+				width="auto">
+
+				<HBox wrap="Wrap"
+					class="sapUiSmallMarginBottom">
+					<VBox class="sapUiMediumMarginEnd">
+						<Label text="{i18n>lblOrderNumber}" />
+						<Input width="200px"
+							value="{path: 'Orders>/NumOrdine'}"
+							enabled="{= !${Mode>/isEdit} }" />
+					</VBox>
+
+					<VBox class="sapUiMediumMarginEnd">
+						<Label text="{i18n>lblClient}" />
+						<Input width="200px"
+							value="{path: 'Orders>/ZET_lista_ordini/Cliente'}"
+							enabled="{= !${Mode>/isEdit} }" />
+					</VBox>
+
+					<VBox class="sapUiMediumMarginEnd">
+						<Label text="{i18n>lblOrderDate}" />
+						<DatePicker width="200px"
+							value="{path: 'Orders>/ZET_lista_ordini/DataOrdine'}"
+							enabled="{= !${Mode>/isEdit} }" />
+					</VBox>
+
+					<VBox>
+						<Label text="{i18n>lblStatus}" />
+						<Select width="200px"
+							selectedKey="{Orders>/ZET_lista_ordini/StatoTxt}"
+							items="{
+        			path: 'States>/'}">
+							<c:Item key="{States>key}"
+								text="{States>text}" />
+						</Select>
+					</VBox>
+				</HBox>
+
+				<Table id="idOrdersTable"
+					items="{Orders>/ZET_dettagli_ordiniSet/results}"
+					mode="MultiSelect">
+					<headerToolbar>
+						<OverflowToolbar>
+							<ToolbarSpacer />
+							<Button icon="sap-icon://add"
+								tooltip="Aggiungi Prodotto"
+								press="onAddProductsDialog">
+							</Button>
+							<Button icon="sap-icon://less"
+								tooltip="">
+							</Button>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="{i18n>lblItemCode}" />
+						</Column>
+						<Column>
+							<Text text="{i18n>lblItemName}" />
+						</Column>
+						<Column>
+							<Text text="{i18n>lblOrderQuantity}" />
+						</Column>
+						<Column hAlign="End">
+							<Text text="{i18n>lblImport}" />
+							<footer>
+								<VBox alignItems="End">
+									<ObjectNumber id="idTotalImport"
+										number="0.00"
+										unit="EUR" />
+								</VBox>
+							</footer>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Orders>CodArticolo}"/>
+								<Text text="{Orders>NomeArticolo}"/>
+								<Text text="{Orders>QuantitaOrdine}"/>
+								<Text text="{Orders>Importo}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<Button icon="sap-icon://nav-back"
+					text="{i18n>lblBackToList}"
+					press="onNavToOrdersList">
+				</Button>
+				<ToolbarSpacer />
+				<Button text="{i18n>btnCancel}"
+					class="sapUiSmallMarginEnd"
+					press=""/>
+				<Button text="{i18n>btnSaveProd}"
+					type="Emphasized"
+					press=".onSaveOrders" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

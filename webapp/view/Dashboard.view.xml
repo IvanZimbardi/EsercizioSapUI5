@@ -1,0 +1,8 @@
+<mvc:View controllerName="testlista.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page title="Dashboard">
+        <content>
+        </content>
+    </Page>
+</mvc:View>

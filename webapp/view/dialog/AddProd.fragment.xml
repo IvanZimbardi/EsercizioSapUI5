@@ -1,0 +1,38 @@
+<c:FragmentDefinition xmlns="sap.m"
+	xmlns:c="sap.ui.core">
+	<Dialog title="Lista Prodotti">
+		<content>
+			<Table id="idDialogOrderTable"
+				mode="MultiSelect"
+				items="{Products>/Data}">
+				<columns>
+					<Column >
+						<Text text="{i18n>lblItemCode}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>lblItemName}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>lblImport}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Products>CodArticolo}"/>
+							<Text text="{Products>NomeArticolo}"/>
+							<Text text="{Products>Importo}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button text="Annulla"
+				press=".onCloseProductsDialog" />
+			<Button text="Aggiungi Selezionati"
+				type="Emphasized"
+				press=".onConfirmProductsSelection" />
+		</buttons>
+	</Dialog>
+</c:FragmentDefinition>
